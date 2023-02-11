@@ -1,5 +1,5 @@
 # Import the modules needed to run the script.
-import sys, os
+import sys, os,requests, csv,datetime,shutil,re
 
 
 # Main definition - constants
@@ -39,6 +39,7 @@ def exec_menu(choice):
             menu_actions['main_menu']()
     return
 
+
 # Menu 1
 def dnsscan():
     print("Menu DNSSCAN !\n")
@@ -70,17 +71,38 @@ def theHarverster():
 
 # Menu A
 def theHarversterTest():
+    # Ici on stock une variable pour revenir dans le répertoire d'origine
+    owd = os.getcwd()
+
     print("Menu TheHarversteTest !\n")
 
     domaine = input("Merci de renseigner le domaine ciblé : ")
-    cmd = "theHarvester -d "+domaine+" -l 500 -b google"
-    output = os.popen(cmd).read()
+    source = input("\nMerci de renseigner une source : ")
+    nameFile = input("\nMerci de renseigner le nom du fichier pour l'enregistrement : ")
+    regex = re.compile(r'^[a-zA-Z0-9._-]+$')
+    while not regex.match(nameFile):
+        print("Invalid filename")
+        nameFile = input("Merci de renseigner le nom du fichier pour l'enregistrement : ")
+    try:
+        cmd = "python3 theHarvester.py -d "+ domaine +" -l 500 -b " + source + " -f "+nameFile+".json"
+        fichierH = "theHarvester-master"
+
+        # cmd="python3 theHarvester.py -d qub.ac.uk -l 200 -b duckduckgo -f "+ nameFile +".json"
+        os.chdir(fichierH)
+        output = os.popen(cmd).read()
+        source="C:\\Users\\lucas\\Desktop\\Projet-2-Py\\theHarvester-master\\"+nameFile+".json"
+        destination="C:\\Users\\lucas\\Desktop\\Projet-2-Py\\SaveTH\\"+nameFile+".json"
+        shutil.move(source,destination)
+    except:
+        print("une erreur est survenue lors de la commande, merci de ressayer. \nL'erreur provient peut être du domaine saisie ou de la source.")
+
+    
+        
+
+
     print(output)
 
-
-
-
-
+    os.chdir(owd)
 
     print("9. Back")
     print("0. Quit")

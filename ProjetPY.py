@@ -1,6 +1,7 @@
 # Import the modules needed to run the script.
 import sys, os
 
+
 # Main definition - constants
 menu_actions  = {}  
 
@@ -10,7 +11,7 @@ menu_actions  = {}
 
 # Main menu
 def main_menu():
-    os.system('clear')
+    # os.system('clear')
     
     print("Bienvenu,\n")
     print("Choisir une action:")
@@ -60,6 +61,27 @@ def shodan():
 # Menu 3
 def theHarverster():
     print("Menu TheHarverster !\n")
+    print("10. Test")
+    print("9. Back")
+    print("0. Quit")
+    choice = input(" >>  ")
+    exec_menu(choice)
+    return
+
+# Menu A
+def theHarversterTest():
+    print("Menu TheHarversteTest !\n")
+
+    domaine = input("Merci de renseigner le domaine ciblé : ")
+    cmd = "theHarvester -d "+domaine+" -l 500 -b google"
+    output = os.popen(cmd).read()
+    print(output)
+
+
+
+
+
+
     print("9. Back")
     print("0. Quit")
     choice = input(" >>  ")
@@ -96,6 +118,7 @@ menu_actions = {
     '4': urlscan,
     '9': back,
     '0': exit,
+    '10': theHarversterTest,
 }
 
 # =======================

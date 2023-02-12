@@ -241,10 +241,10 @@ def check_malicious_domain(domain):
         print("\nUne erreur s'est produite lors de la vérification du site web.")
 
 
-# Menu 2
-
-def shodan():
-    
+# Menu 2   
+# # Créer une instance de la classe API de Shodan
+api = shodan.Shodan("7NiDoaY2dVv3RmdzDiXpD4XAsG73c3Lu")
+def menu_shodan():
     print("""
           
 ===================================
@@ -261,12 +261,6 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
           """)
     print("Menu SHODAN !\n")
-
-    
-# # Créer une instance de la classe API de Shodan
-api = shodan.Shodan("7NiDoaY2dVv3RmdzDiXpD4XAsG73c3Lu")
-def menu_shodan():
-    print("Bienvenue sur le menu Shodan \n")
     print("1. Rechercher des informations sur un hôte")
     print("2. Rechercher des informations sur une adresse IP")
     print("3. Retour")
@@ -354,16 +348,16 @@ def theHarverster():
 
     print("""
           
-======================================================
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
- _   _            _                               _   
-| |_| |__   ___  | |__   __ _ _ ____   _____  ___| |_ 
-| __| '_ \ / _ \ | '_ \ / _` | '__\ \ / / _ \/ __| __|
-| |_| | | |  __/ | | | | (_| | |   \ V /  __/\__ \ |_ 
- \__|_| |_|\___| |_| |_|\__,_|_|    \_/ \___||___/\__|
-                                                      
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-======================================================
+===============================================================
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+ _   _            _                               _            
+| |_| |__   ___  | |__   __ _ _ ____   _____  ___| |_ ___ _ __ 
+| __| '_ \ / _ \ | '_ \ / _` | '__\ \ / / _ \/ __| __/ _ \ '__|
+| |_| | | |  __/ | | | | (_| | |   \ V /  __/\__ \ ||  __/ |   
+ \__|_| |_|\___| |_| |_|\__,_|_|    \_/ \___||___/\__\___|_|   
+                                                                                                                   
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+===============================================================
 
           """)
 
@@ -469,12 +463,12 @@ def urlscan():
           
 =======================================
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-     _                                 
-  __| |_ __  ___   ___  ___ __ _ _ __  
- / _` | '_ \/ __| / __|/ __/ _` | '_ \ 
-| (_| | | | \__ \ \__ \ (_| (_| | | | |
- \__,_|_| |_|___/ |___/\___\__,_|_| |_|
-                                       
+            _                       
+ _   _ _ __| |  ___  ___ __ _ _ __  
+| | | | '__| | / __|/ __/ _` | '_ \ 
+| |_| | |  | | \__ \ (_| (_| | | | |
+ \__,_|_|  |_| |___/\___\__,_|_| |_|
+                                    
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 =======================================
 

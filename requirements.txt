@@ -87,6 +87,7 @@ Pillow==9.4.0
 platformdirs==3.0.0
 pluggy==1.0.0
 portend==3.1.0
+prettytable==3.6.0
 prompt-toolkit==3.0.36
 psutil==5.9.4
 publicsuffixlist==0.7.14

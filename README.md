@@ -1,20 +1,32 @@
-# Projet-2-Py
+OSINT Toolkit
 
-# Version python minimum requise : 3.10.0
+Ce projet est un outil d'OSINT développé en Python pour collecter des informations sur des cibles. Il utilise les modules suivants :
+- dnsscan
+- shodan
+- theharvester
+- urlscan.io
 
-# Dépendance à installer
-# PREREQUIS : S'assurrer d'avoir python3 d'installé
-# Lancer votre invite de commande ->
-# Se positionner sur l'emplacement du projet ->
-# Copier la commande suivante : python3 -m pip install -r requirements.txt
+Prérequis
+- Python 3.x installé sur votre ordinateur
+- Compte API valide pour shodan et urlscan.io (facultatif)
 
+Installation
+1. Clonez ce dépôt sur votre ordinateur :
+   git clone https://github.com/Chauvryl/Projet-2-Py
+2. Installez les dépendances nécessaires à l'aide du fichier requirements.txt :
+   python3 -m pip install -r requirements.txt
 
-# Voice le projet OSINT ayant pour but de récuperer de manière passive des informations publiques et légales par le biais d'outils tel que : DNSSCAN / SHODAN / THEHARVESTER / URLSCAN.IO
+Configuration
+1. Ouvrez le fichier config.py et entrez vos clés API pour shodan et urlscan.io si vous en possédez.
 
+Utilisation
+1. Lancez l'outil à partir de votre terminal en exécutant le fichier projetPY.py :
+   python projetPY.py
+2. Suivez les instructions à l'écran pour choisir le module que vous souhaitez utiliser et entrez les informations requises.
 
-# Réalisation du projet en python avec l'aide de GITHUB et GITKRAKEN pour le versioning, trello pour la gestion de projet et d'IDE tel que VS CODE
+Contribuer
+Nous sommes heureux d'accepter des contributions pour améliorer ce projet. Si vous souhaitez contribuer, veuillez ouvrir une demande de pull.
 
-
-
-
-# liens github de theharvester : https://github.com/laramies/theHarvester
+Remarques
+- Veuillez utiliser ce projet de manière éthique et conformément aux lois en vigueur dans votre pays.
+- L'utilisation de ce projet est à vos propres risques. Nous ne sommes pas responsables de tout dommage causé par l'utilisation de ce projet.

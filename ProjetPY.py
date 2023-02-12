@@ -2,6 +2,7 @@
 import sys, os,requests, csv,datetime,shutil,re
 
 
+
 # Main definition - constants
 menu_actions  = {}  
 
@@ -61,48 +62,97 @@ def shodan():
 
 # Menu 3
 def theHarverster():
-    print("Menu TheHarverster !\n")
-    print("10. Test")
-    print("9. Back")
-    print("0. Quit")
-    choice = input(" >>  ")
-    exec_menu(choice)
-    return
 
-# Menu A
-def theHarversterTest():
+    print("Menu TheHarverster !\n")
+
     # Ici on stock une variable pour revenir dans le répertoire d'origine
     owd = os.getcwd()
+    now = datetime.datetime.now()
+    name = "\CVE"+"_"+str(now.strftime("%Y-%d-%m_%H-%M-%S-%f"))+".csv"
 
-    print("Menu TheHarversteTest !\n")
 
     domaine = input("Merci de renseigner le domaine ciblé : ")
-    source = input("\nMerci de renseigner une source : ")
-    nameFile = input("\nMerci de renseigner le nom du fichier pour l'enregistrement : ")
-    regex = re.compile(r'^[a-zA-Z0-9._-]+$')
-    while not regex.match(nameFile):
-        print("Invalid filename")
-        nameFile = input("Merci de renseigner le nom du fichier pour l'enregistrement : ")
-    try:
-        cmd = "python3 theHarvester.py -d "+ domaine +" -l 500 -b " + source + " -f "+nameFile+".json"
-        fichierH = "theHarvester-master"
+    limite = input("\nMerci de renseigné une limite de résultat à afficher : ")
+    source = input("\nMerci de renseigner une source (all par défaut si rien renseigné mais prend du temps et beaucoup de données) : ")
 
-        # cmd="python3 theHarvester.py -d qub.ac.uk -l 200 -b duckduckgo -f "+ nameFile +".json"
-        os.chdir(fichierH)
-        output = os.popen(cmd).read()
-        source="C:\\Users\\lucas\\Desktop\\Projet-2-Py\\theHarvester-master\\"+nameFile+".json"
-        destination="C:\\Users\\lucas\\Desktop\\Projet-2-Py\\SaveTH\\"+nameFile+".json"
-        shutil.move(source,destination)
-    except:
-        print("une erreur est survenue lors de la commande, merci de ressayer. \nL'erreur provient peut être du domaine saisie ou de la source.")
+    if source == "":
 
-    
-        
+        nameFile = input("\nMerci de renseigner le nom du fichier pour l'enregistrement : ")
+        regex = re.compile(r'^[a-zA-Z0-9._-]+$')
+
+        while not regex.match(nameFile):
+
+            print("Invalid filename")
+            nameFile = input("Merci de renseigner le nom du fichier pour l'enregistrement : ")
+
+        try:
+
+            nameFile = nameFile + "_" +  str(now.strftime("%Y-%d-%m_%H-%M-%S-%f"))
+            destination = input("\nOù souhaitez vous enregistrer le résultat (renseigné le chemin d'accès en doublant les \\) : ")+"\\"+nameFile+".json"
+            cmd = "python3 theHarvester.py -d "+ domaine +" -l "+ limite +" -b all -f "+nameFile+".json"
+            fichierH = "theHarvester-master"
+
+            # cmd="python3 theHarvester.py -d qub.ac.uk -l 200 -b duckduckgo -f "+ nameFile +".json"
+            os.chdir(fichierH)
+            output = os.popen(cmd).read()
 
 
-    print(output)
+            #-------------------------------------------------------------------------------------#
+            #------------MODIFIER LE CHEMIN SOURCE DU FICHIER-------------------------------------#
+            #-------------------------------------------------------------------------------------#
+            source="C:\\Users\\lucas\\Desktop\\Projet-2-Py\\theHarvester-master\\"+nameFile+".json"
+
+            shutil.move(source,destination)
+            os.system('cls')
+
+            print("\n La commande c'est déroulé avec succès !!!\n")
+
+        except:
+
+            print("\nune erreur est survenue lors de la commande, merci de ressayer. \nL'erreur provient peut être du domaine saisie ou de la source.")
+
+    else:
+
+        nameFile = input("\nMerci de renseigner le nom du fichier pour l'enregistrement : ")
+        regex = re.compile(r'^[a-zA-Z0-9._-]+$')
+
+        while not regex.match(nameFile):
+
+            print("Invalid filename")
+            nameFile = input("Merci de renseigner le nom du fichier pour l'enregistrement : ")
+
+        try:
+            
+            nameFile = nameFile + "_" +  str(now.strftime("%Y-%d-%m_%H-%M-%S-%f"))
+            destination = input("\nOù souhaitez vous enregistrer le résultat (renseigné le chemin d'accès en doublant les \\) : ")+"\\"+nameFile+".json"
+
+            cmd = "python3 theHarvester.py -d "+ domaine +" -l "+ limite +" -b " + source + " -f "+nameFile+".json"
+            fichierH = "theHarvester-master"
+
+            # cmd="python3 theHarvester.py -d qub.ac.uk -l 200 -b duckduckgo -f "+ nameFile +".json"
+            os.chdir(fichierH)
+            output = os.popen(cmd).read()
+
+            # On déplace l'enregistrement du résultat
+
+            #-------------------------------------------------------------------------------------#
+            #------------MODIFIER LE CHEMIN SOURCE DU FICHIER-------------------------------------#
+            #-------------------------------------------------------------------------------------#
+            source="C:\\Users\\lucas\\Desktop\\Projet-2-Py\\theHarvester-master\\"+nameFile+".json"
+
+            shutil.move(source,destination)
+            os.system('cls')
+
+            print("\n La commande c'est déroulé avec succès !!!\n")
+
+        except:
+
+            print("\nune erreur est survenue lors de la commande, merci de ressayer. \nL'erreur provient peut être du domaine saisie ou de la source.\n")
+
+    # print(output)
 
     os.chdir(owd)
+
 
     print("9. Back")
     print("0. Quit")
@@ -140,7 +190,6 @@ menu_actions = {
     '4': urlscan,
     '9': back,
     '0': exit,
-    '10': theHarversterTest,
 }
 
 # =======================

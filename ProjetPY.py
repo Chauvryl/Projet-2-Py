@@ -4,7 +4,7 @@ import dns.resolver # Importe le module dns.resolver pour envoyer des requêtes 
 import socket # Importe le module socket pour effectuer des connexions réseau
 import requests # Importe le module requests pour effectuer des requêtes HTTP
 import json # Importe le module json pour travailler avec des données en format JSON
-import csv,datetime,shutil,re, shodan
+import csv,datetime,shutil,re,shodan
 from prettytable import PrettyTable
 
 
@@ -117,7 +117,7 @@ def exec_menu(choice):
 
 # Menu 1
 def dnsscan_menu():
-<<<<<<< HEAD
+
     
     print("""
           
@@ -133,9 +133,9 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 =======================================
 
           """)
-=======
+
     os.system('cls')
->>>>>>> Dev
+
     # Boucle infinie pour permettre à l'utilisateur de choisir plusieurs options
     while True:
         # Affiche le menu d'options
@@ -242,7 +242,7 @@ def check_malicious_domain(domain):
 
 
 # Menu 2
-<<<<<<< HEAD
+
 def shodan():
     
     print("""
@@ -261,7 +261,7 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
           """)
     print("Menu SHODAN !\n")
-=======
+
     
 # # Créer une instance de la classe API de Shodan
 api = shodan.Shodan("7NiDoaY2dVv3RmdzDiXpD4XAsG73c3Lu")
@@ -306,7 +306,7 @@ def host_search(api):
         print("Une erreur s'est produite : ", e)
 
 
->>>>>>> Dev
+
     print("9. Back")
     print("0. Quit")
     choice = input(" >>  ")
@@ -396,11 +396,11 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
             owd2 = os.getcwd()
 
 
-<<<<<<< HEAD
+
             source=owd2+nameFile+".json"
-=======
+
             source=owd2+"\\"+nameFile+".json"
->>>>>>> Dev
+
 
             shutil.move(source,destination)
             os.system('cls')
@@ -435,10 +435,10 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
             owd2 = os.getcwd()
 
             # On déplace l'enregistrement du résultat
-<<<<<<< HEAD
 
-=======
->>>>>>> Dev
+
+
+
             source=owd2+"\\"+nameFile+".json"
 
             shutil.move(source,destination)

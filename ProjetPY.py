@@ -19,7 +19,74 @@ menu_actions  = {}
 def main_menu():
     # os.system('clear')
     
-    print("Bienvenue, sur le projet OSINT\nAUTHEUR DU PROJET : ROUABAH Mohamed-Amine ; AYUB TAHIR Anthony ; CHAUVRY Lucas\nRéalisation du projet en 2023\nN'oublier pas de lire le README.TXT pour installer les dépendances.\n")
+    print("""
+          
+                                                                                               
+                                                                                               
+     OOOOOOOOO        SSSSSSSSSSSSSSS IIIIIIIIIINNNNNNNN        NNNNNNNNTTTTTTTTTTTTTTTTTTTTTTT
+   OO:::::::::OO    SS:::::::::::::::SI::::::::IN:::::::N       N::::::NT:::::::::::::::::::::T
+ OO:::::::::::::OO S:::::SSSSSS::::::SI::::::::IN::::::::N      N::::::NT:::::::::::::::::::::T
+O:::::::OOO:::::::OS:::::S     SSSSSSSII::::::IIN:::::::::N     N::::::NT:::::TT:::::::TT:::::T
+O::::::O   O::::::OS:::::S              I::::I  N::::::::::N    N::::::NTTTTTT  T:::::T  TTTTTT
+O:::::O     O:::::OS:::::S              I::::I  N:::::::::::N   N::::::N        T:::::T        
+O:::::O     O:::::O S::::SSSS           I::::I  N:::::::N::::N  N::::::N        T:::::T        
+O:::::O     O:::::O  SS::::::SSSSS      I::::I  N::::::N N::::N N::::::N        T:::::T        
+O:::::O     O:::::O    SSS::::::::SS    I::::I  N::::::N  N::::N:::::::N        T:::::T        
+O:::::O     O:::::O       SSSSSS::::S   I::::I  N::::::N   N:::::::::::N        T:::::T        
+O:::::O     O:::::O            S:::::S  I::::I  N::::::N    N::::::::::N        T:::::T        
+O::::::O   O::::::O            S:::::S  I::::I  N::::::N     N:::::::::N        T:::::T        
+O:::::::OOO:::::::OSSSSSSS     S:::::SII::::::IIN::::::N      N::::::::N      TT:::::::TT      
+ OO:::::::::::::OO S::::::SSSSSS:::::SI::::::::IN::::::N       N:::::::N      T:::::::::T      
+   OO:::::::::OO   S:::::::::::::::SS I::::::::IN::::::N        N::::::N      T:::::::::T      
+     OOOOOOOOO      SSSSSSSSSSSSSSS   IIIIIIIIIINNNNNNNN         NNNNNNN      TTTTTTTTTTT      
+                                                                                        python       
+                                                               
+                                                               
+                                                                                               
+    Bienvenue, sur le projet OSINT\nAUTHEUR DU PROJET :
+                                                                                               
+        
+        ROUABAH Mohamed-Amine
+        AYUB TAHIR Anthony
+        CHAUVRY Lucas
+        
+        
+        
+        
+        Réalisation du projet en 2023\nN'oublier pas de lire le README.TXT pour installer les dépendances
+                                                                                               
+
+
+
+
+
+
+
+
+
+
+
+          """)
+    
+    
+    
+    print("""
+          
+============================
+xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+ _ __ ___   ___ _ __  _   _ 
+| '_ ` _ \ / _ \ '_ \| | | |
+| | | | | |  __/ | | | |_| |
+|_| |_| |_|\___|_| |_|\__,_|
+                            
+xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+============================
+
+          """)
+    
+    
+    
+    print(".\n")
     print("Choisir une action:")
     print("1. Dnsscan")
     print("2. Shodan")
@@ -48,6 +115,21 @@ def exec_menu(choice):
 
 # Menu 1
 def dnsscan_menu():
+    
+    print("""
+          
+=======================================
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+     _                                 
+  __| |_ __  ___   ___  ___ __ _ _ __  
+ / _` | '_ \/ __| / __|/ __/ _` | '_ \ 
+| (_| | | | \__ \ \__ \ (_| (_| | | | |
+ \__,_|_| |_|___/ |___/\___\__,_|_| |_|
+                                       
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+=======================================
+
+          """)
     # Boucle infinie pour permettre à l'utilisateur de choisir plusieurs options
     while True:
         # Affiche le menu d'options
@@ -153,6 +235,22 @@ def check_malicious_domain(domain):
 
 # Menu 2
 def shodan():
+    
+    print("""
+          
+===================================
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+     _               _             
+ ___| |__   ___   __| | __ _ _ __  
+/ __| '_ \ / _ \ / _` |/ _` | '_ \ 
+\__ \ | | | (_) | (_| | (_| | | | |
+|___/_| |_|\___/ \__,_|\__,_|_| |_|
+                                   
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+===================================
+
+          """)
     print("Menu SHODAN !\n")
     print("9. Back")
     print("0. Quit")
@@ -163,13 +261,24 @@ def shodan():
 # Menu 3
 def theHarverster():
 
-    print("Menu TheHarverster !\n")
+    print("""
+          
+======================================================
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+ _   _            _                               _   
+| |_| |__   ___  | |__   __ _ _ ____   _____  ___| |_ 
+| __| '_ \ / _ \ | '_ \ / _` | '__\ \ / / _ \/ __| __|
+| |_| | | |  __/ | | | | (_| | |   \ V /  __/\__ \ |_ 
+ \__|_| |_|\___| |_| |_|\__,_|_|    \_/ \___||___/\__|
+                                                      
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+======================================================
+
+          """)
 
     # Ici on stock une variable pour revenir dans le répertoire d'origine
     owd = os.getcwd()
     now = datetime.datetime.now()
-    name = "\CVE"+"_"+str(now.strftime("%Y-%d-%m_%H-%M-%S-%f"))+".csv"
-
 
     domaine = input("Merci de renseigner le domaine ciblé : ")
     limite = input("\nMerci de renseigné une limite de résultat à afficher : ")
@@ -186,22 +295,16 @@ def theHarverster():
             nameFile = input("Merci de renseigner le nom du fichier pour l'enregistrement : ")
 
         try:
-
             nameFile = nameFile + "_" +  str(now.strftime("%Y-%d-%m_%H-%M-%S-%f"))
             destination = owd+"\\SaveTH\\"+nameFile+".json"
             cmd = "python theHarvester.py -d "+ domaine +" -l "+ limite +" -b all -f "+nameFile+".json"
             fichierH = "theHarvester-master"
 
-            # cmd="python theHarvester.py -d qub.ac.uk -l 200 -b duckduckgo -f "+ nameFile +".json"
             os.chdir(fichierH)
             output = os.popen(cmd).read()
             owd2 = os.getcwd()
 
 
-            #-------------------------------------------------------------------------------------#
-            #------------MODIFIER LE CHEMIN SOURCE DU FICHIER-------------------------------------#
-            #-------------------------------------------------------------------------------------#
-            # source="C:\\Users\\lucas\\Desktop\\Projet-2-Py\\theHarvester-master\\"+nameFile+".json"
             source=owd2+nameFile+".json"
 
             shutil.move(source,destination)
@@ -239,12 +342,7 @@ def theHarverster():
 
             # On déplace l'enregistrement du résultat
 
-            #-------------------------------------------------------------------------------------#
-            #------------MODIFIER LE CHEMIN SOURCE DU FICHIER-------------------------------------#
-            #-------------------------------------------------------------------------------------#
-            # source="C:\\Users\\lucas\\Desktop\\Projet-2-Py\\theHarvester-master\\"+nameFile+".json"
             source=owd2+"\\"+nameFile+".json"
-            # print(source)
 
             shutil.move(source,destination)
             os.system('cls')
@@ -268,23 +366,41 @@ def theHarverster():
 
 # Menu 4
 def urlscan():
-    print("Menu URLSCAN !\n")
-    
-    # ---------------------------------------------------------------
+
+
+    print("""
+          
+=======================================
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+     _                                 
+  __| |_ __  ___   ___  ___ __ _ _ __  
+ / _` | '_ \/ __| / __|/ __/ _` | '_ \ 
+| (_| | | | \__ \ \__ \ (_| (_| | | | |
+ \__,_|_| |_|___/ |___/\___\__,_|_| |_|
+                                       
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+=======================================
+
+          """)
 
     while (True):
         apikey = input("\n Inserer votre clef api :")
-        url = input("\n Inserer l'url à scan : ")
+        # delete space if exist
+        apikey = apikey.replace(" ", "")
+
 
         try:
             headers = {'API-Key':apikey,'Content-Type':'application/json'}
-            data = {"url": url, "visibility": "public"}
+            data = {"url": "google.com", "visibility": "public"}
             response = requests.post('https://urlscan.io/api/v1/scan/',headers=headers, data=json.dumps(data))
 
             if(response.status_code != 200):
                 print("code erreur", response.status_code)
                 raise Exception
 
+            else:
+                print("--------------------------------------------------------------")
+                print("Votre clef fonctionne \n")
             # print(response)
             # print(type(response))
             break
@@ -292,11 +408,50 @@ def urlscan():
         except:
             print("Cette clef ne marche pas \n")
 
-    # RESULT
-    print(response.json()["result"])
+
+    while (True):
+            url = input("\n Inserer l'url à scan : ")
+            
+            # delete http, https or www on url
+            domain_urlscan = url.replace("https://", "").replace("http://", "").replace("www.", "")
+            print(url)
+            print(type(url))
+
+            # add http, https or www on url to get every input with same begin
+            url = "https://www."+domain_urlscan
+            print(url)
+            print(type(url))
 
 
-    # ------------------------------------------------------------
+            try:
+                headers = {'API-Key':apikey,'Content-Type':'application/json'}
+                data = {"url":url, "visibility": "public"}
+                response = requests.post('https://urlscan.io/api/v1/scan/',headers=headers, data=json.dumps(data))
+
+                if(response.status_code != 200):
+                    print("code erreur", response.status_code)
+                    raise Exception
+
+                else:
+                    print("écriture du fichier ...")
+                    print("--------------------------------------------------------------")
+                    # print(response.json()["result"])
+
+                    # ECRIT DANS UN FICHIER ET LE LIS
+                    text = open("URLSCAN/"+domain_urlscan+".txt","a")
+                    text.write(datetime.datetime.now().strftime("%Y-%d-%m_%H-%M-%S-%f"))
+                    text.write("\n url du site: \n " + url + "\n\n")
+                    text.write("\n page contenant les informations du scan: \n" + url + "\n\n")
+                    text.write("\n ----------------------------------------------------------------------------- \n\n")
+                    text.close()
+                    readtext = open("URLSCAN/"+domain_urlscan+".txt","r")
+                    print(readtext.read())
+
+                    break
+
+            except:
+                print(" Erreur dans le lien \n")
+
 
     print("9. Back")
     print("0. Quit")
@@ -312,9 +467,6 @@ def back():
 def exit():
     sys.exit()
 
-# =======================
-#    MENUS DEFINITIONS
-# =======================
 
 # Menu definition
 menu_actions = {
@@ -327,11 +479,8 @@ menu_actions = {
     '0': exit,
 }
 
-# =======================
-#      MAIN PROGRAM
-# =======================
+
 
 # Main Program
 if __name__ == "__main__":
-    # Launch main menu
     main_menu()

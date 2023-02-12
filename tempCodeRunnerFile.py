@@ -19,7 +19,7 @@ menu_actions  = {}
 def main_menu():
     # os.system('clear')
     
-    print("Bienvenu,\n")
+    print("Bienvenue, sur le projet OSINT\nAUTHEUR DU PROJET : ROUABAH Mohamed-Amine ; AYUB TAHIR Anthony ; CHAUVRY Lucas\nRéalisation du projet en 2023\nN'oublier pas de lire le README.TXT pour installer les dépendances.\n")
     print("Choisir une action:")
     print("1. Dnsscan")
     print("2. Shodan")
@@ -168,8 +168,6 @@ def theHarverster():
     # Ici on stock une variable pour revenir dans le répertoire d'origine
     owd = os.getcwd()
     now = datetime.datetime.now()
-    name = "\CVE"+"_"+str(now.strftime("%Y-%d-%m_%H-%M-%S-%f"))+".csv"
-
 
     domaine = input("Merci de renseigner le domaine ciblé : ")
     limite = input("\nMerci de renseigné une limite de résultat à afficher : ")
@@ -192,16 +190,11 @@ def theHarverster():
             cmd = "python theHarvester.py -d "+ domaine +" -l "+ limite +" -b all -f "+nameFile+".json"
             fichierH = "theHarvester-master"
 
-            # cmd="python theHarvester.py -d qub.ac.uk -l 200 -b duckduckgo -f "+ nameFile +".json"
             os.chdir(fichierH)
             output = os.popen(cmd).read()
             owd2 = os.getcwd()
 
 
-            #-------------------------------------------------------------------------------------#
-            #------------MODIFIER LE CHEMIN SOURCE DU FICHIER-------------------------------------#
-            #-------------------------------------------------------------------------------------#
-            # source="C:\\Users\\lucas\\Desktop\\Projet-2-Py\\theHarvester-master\\"+nameFile+".json"
             source=owd2+nameFile+".json"
 
             shutil.move(source,destination)
@@ -239,12 +232,7 @@ def theHarverster():
 
             # On déplace l'enregistrement du résultat
 
-            #-------------------------------------------------------------------------------------#
-            #------------MODIFIER LE CHEMIN SOURCE DU FICHIER-------------------------------------#
-            #-------------------------------------------------------------------------------------#
-            # source="C:\\Users\\lucas\\Desktop\\Projet-2-Py\\theHarvester-master\\"+nameFile+".json"
             source=owd2+"\\"+nameFile+".json"
-            # print(source)
 
             shutil.move(source,destination)
             os.system('cls')
@@ -269,6 +257,81 @@ def theHarverster():
 # Menu 4
 def urlscan():
     print("Menu URLSCAN !\n")
+
+    # ---------------------------------------------------------------
+
+    # while (True):
+    #     apikey = input("\n Inserer votre clef api :")
+    #     # delete space if exist
+    #     apikey = apikey.replace(" ", "")
+
+
+    #     try:
+    #         headers = {'API-Key':apikey,'Content-Type':'application/json'}
+    #         data = {"url": "google.com", "visibility": "public"}
+    #         response = requests.post('https://urlscan.io/api/v1/scan/',headers=headers, data=json.dumps(data))
+
+    #         if(response.status_code != 200):
+    #             print("code erreur", response.status_code)
+    #             raise Exception
+
+    #         else:
+    #             print("--------------------------------------------------------------")
+    #             print("Votre clef fonctionne \n")
+    #         # print(response)
+    #         # print(type(response))
+    #         break
+
+    #     except:
+    #         print("Cette clef ne marche pas \n")
+
+
+    while (True):
+            url = input("\n Inserer l'url à scan : ")
+            
+            # delete http, https or www on url
+            url = url.replace("https://", "").replace("http://", "").replace("www.", "")
+            print(url)
+            print(type(url))
+            
+            # add http, https or www on url to get every input with same begin
+            url = "https://www."+url
+            print(url)
+            print(type(url))
+            
+
+            try:
+                headers = {'API-Key':"2e501d6a-6d01-4498-8013-637743fa32ef",'Content-Type':'application/json'}
+                data = {"url":"https://www.datacamp.com/", "visibility": "public"}
+                response = requests.post('https://urlscan.io/api/v1/scan/',headers=headers, data=json.dumps(data))
+
+                if(response.status_code != 200):
+                    print("code erreur", response.status_code)
+                    raise Exception
+
+                else:
+                    print("écriture du fichier ...")
+                    print("--------------------------------------------------------------")
+                    print(response.json()["result"])
+                    
+
+                    # # Ouvre un fichier pour enregistrer les résultats et écrit les adresses IP associées au domaine
+                    # with open(f'{domain}/resultat.txt', 'w') as file:
+                    #     file.write(f'Domaine: {domain}\n')
+                    #     for rdata in answers:
+                    #         file.write(f'Adresse IP : {rdata.address}\n')
+                    # # Affiche un message indiquant que les résultats ont été enregistrés dans un fichier
+                    # print(f"Le resultat pour {domain} a été sauvegardé dans {domain}/resultat.txt.")
+                    break
+
+            except:
+                print(" Erreur dans le lien \n")
+
+
+
+
+    # ------------------------------------------------------------
+
     print("9. Back")
     print("0. Quit")
     choice = input(" >>  ")

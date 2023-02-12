@@ -88,19 +88,21 @@ def theHarverster():
         try:
 
             nameFile = nameFile + "_" +  str(now.strftime("%Y-%d-%m_%H-%M-%S-%f"))
-            destination = input("\nOù souhaitez vous enregistrer le résultat (renseigné le chemin d'accès en doublant les \\) : ")+"\\"+nameFile+".json"
+            destination = owd+"\\SaveTH\\"+nameFile+".json"
             cmd = "python3 theHarvester.py -d "+ domaine +" -l "+ limite +" -b all -f "+nameFile+".json"
             fichierH = "theHarvester-master"
 
             # cmd="python3 theHarvester.py -d qub.ac.uk -l 200 -b duckduckgo -f "+ nameFile +".json"
             os.chdir(fichierH)
             output = os.popen(cmd).read()
+            owd2 = os.getcwd()
 
 
             #-------------------------------------------------------------------------------------#
             #------------MODIFIER LE CHEMIN SOURCE DU FICHIER-------------------------------------#
             #-------------------------------------------------------------------------------------#
-            source="C:\\Users\\lucas\\Desktop\\Projet-2-Py\\theHarvester-master\\"+nameFile+".json"
+            # source="C:\\Users\\lucas\\Desktop\\Projet-2-Py\\theHarvester-master\\"+nameFile+".json"
+            source=owd2+nameFile+".json"
 
             shutil.move(source,destination)
             os.system('cls')
@@ -124,21 +126,25 @@ def theHarverster():
         try:
             
             nameFile = nameFile + "_" +  str(now.strftime("%Y-%d-%m_%H-%M-%S-%f"))
-            destination = input("\nOù souhaitez vous enregistrer le résultat (renseigné le chemin d'accès en doublant les \\) : ")+"\\"+nameFile+".json"
-
+            # destination = input("\nOù souhaitez vous enregistrer le résultat (renseigné le chemin d'accès en doublant les \\) : ")+"\\"+nameFile+".json"
+            destination = owd+"\\SaveTH\\"+nameFile+".json"
+            # print(destination)
             cmd = "python3 theHarvester.py -d "+ domaine +" -l "+ limite +" -b " + source + " -f "+nameFile+".json"
             fichierH = "theHarvester-master"
 
             # cmd="python3 theHarvester.py -d qub.ac.uk -l 200 -b duckduckgo -f "+ nameFile +".json"
             os.chdir(fichierH)
             output = os.popen(cmd).read()
+            owd2 = os.getcwd()
 
             # On déplace l'enregistrement du résultat
 
             #-------------------------------------------------------------------------------------#
             #------------MODIFIER LE CHEMIN SOURCE DU FICHIER-------------------------------------#
             #-------------------------------------------------------------------------------------#
-            source="C:\\Users\\lucas\\Desktop\\Projet-2-Py\\theHarvester-master\\"+nameFile+".json"
+            # source="C:\\Users\\lucas\\Desktop\\Projet-2-Py\\theHarvester-master\\"+nameFile+".json"
+            source=owd2+"\\"+nameFile+".json"
+            # print(source)
 
             shutil.move(source,destination)
             os.system('cls')

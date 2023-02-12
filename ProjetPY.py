@@ -4,7 +4,7 @@ import dns.resolver # Importe le module dns.resolver pour envoyer des requêtes 
 import socket # Importe le module socket pour effectuer des connexions réseau
 import requests # Importe le module requests pour effectuer des requêtes HTTP
 import json # Importe le module json pour travailler avec des données en format JSON
-import sys, os,requests, csv,datetime,shutil,re
+import csv,datetime,shutil,re
 
 
 

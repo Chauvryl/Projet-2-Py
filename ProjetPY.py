@@ -4,7 +4,8 @@ import dns.resolver # Importe le module dns.resolver pour envoyer des requêtes 
 import socket # Importe le module socket pour effectuer des connexions réseau
 import requests # Importe le module requests pour effectuer des requêtes HTTP
 import json # Importe le module json pour travailler avec des données en format JSON
-import csv,datetime,shutil,re
+import csv,datetime,shutil,re, shodan
+from prettytable import PrettyTable
 
 
 
@@ -152,13 +153,69 @@ def check_malicious_domain(domain):
 
 
 # Menu 2
-def shodan():
-    print("Menu SHODAN !\n")
-    print("9. Back")
-    print("0. Quit")
-    choice = input(" >>  ")
-    exec_menu(choice)
-    return
+    
+# # Créer une instance de la classe API de Shodan
+api = shodan.Shodan("7NiDoaY2dVv3RmdzDiXpD4XAsG73c3Lu")
+def menu_shodan():
+    print("Bienvenue sur le menu Shodan \n")
+    print("1. Rechercher des informations sur un hôte")
+    print("2. Rechercher des informations sur une adresse IP")
+    print("3. Retour")
+    option = int(input("Choisissez une option (1-3) : "))
+    return option
+    
+
+
+# Effectuer une recherche d'hôte en utilisant la méthode host
+def host_search(api):
+    host = input("Entrez l'adresse IP ou le nom d'hôte à rechercher : ")
+    try:
+        host_ip = socket.gethostbyname(host)
+        resultat = api.host(host_ip)
+        print("Informations sur l'hôte :")
+        print("IP : ", resultat['ip_str'])
+        print("Organisation : ", resultat.get('org', 'N/A'))
+        print("OS : ", resultat.get('os', 'N/A'))
+        for service in resultat['data']:
+            print("Port : ", service['port'])
+            print("Service : ", service.get('name', 'N/A'))
+            print("Etat : ", service.get('state', 'N/A'))
+            print("")
+    except Exception as e:
+        print("Une erreur s'est produite : ", e)
+        
+
+# Effectuer une recherche d'adresse IP en utilisant la méthode search
+def ip_search(api):
+    adresse_ip = input("Entrez l'adresse IP à rechercher : ")
+    resultats = api.search(adresse_ip)
+    if resultats.get('matches'):
+        table = PrettyTable(["IP", "Organisation", "OS", "Port", "Service", "Etat"])
+        table.max_width["Service"] = 50
+        print("Informations sur l'adresse IP :")
+        print("Nombre de résultats trouvés : ", resultats['total'])
+        nombre_resultats = int(input("Combien de résultats souhaitez-vous afficher? "))
+        for i, resultat in enumerate(resultats['matches']):
+            if i >= nombre_resultats:
+                break
+            if resultat.get('data'):
+                for service in resultat['data']:
+                    if type(service) == dict:
+                        table.add_row([resultat['ip_str'], resultat.get('org', 'N/A'), resultat.get('os', 'N/A'),
+                                       service['port'], service.get('name', 'N/A'), service.get('state', 'N/A')])
+                    else:
+                        table.add_row([resultat['ip_str'], resultat.get('org', 'N/A'), resultat.get('os', 'N/A'),
+                                       "N/A", service, "N/A"])
+            else:
+                table.add_row([resultat['ip_str'], resultat.get('org', 'N/A'), resultat.get('os', 'N/A'),
+                               "N/A", "N/A", "N/A"])
+        print(table)
+    else:
+        print("Aucun résultat trouvé.")
+
+# Boucle pour afficher le menu et effectuer des recherches en fonction de l'option choisie
+
+
 
 # Menu 3
 def theHarverster():
@@ -202,7 +259,7 @@ def theHarverster():
             #------------MODIFIER LE CHEMIN SOURCE DU FICHIER-------------------------------------#
             #-------------------------------------------------------------------------------------#
             # source="C:\\Users\\lucas\\Desktop\\Projet-2-Py\\theHarvester-master\\"+nameFile+".json"
-            source=owd2+nameFile+".json"
+            source=owd2+"\\"+nameFile+".json"
 
             shutil.move(source,destination)
             os.system('cls')
@@ -291,13 +348,20 @@ def exit():
 menu_actions = {
     'main_menu': main_menu,
     '1': dnsscan_menu,
-    '2': shodan,
+    '2': menu_shodan,
     '3': theHarverster,
     '4': urlscan,
     '9': back,
     '0': exit,
 }
-
+while True:
+    option = menu_shodan()
+    if option == 1:
+        host_search(api)
+    elif option == 2:
+        ip_search(api)
+    else:
+        break
 # =======================
 #      MAIN PROGRAM
 # =======================

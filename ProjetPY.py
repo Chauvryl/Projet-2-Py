@@ -19,6 +19,7 @@ menu_actions  = {}
 # Main menu
 def main_menu():
     # os.system('clear')
+    os.system('cls')
     
     print("Bienvenue, sur le projet OSINT\nAUTHEUR DU PROJET : ROUABAH Mohamed-Amine ; AYUB TAHIR Anthony ; CHAUVRY Lucas\nRéalisation du projet en 2023\nN'oublier pas de lire le README.TXT pour installer les dépendances.\n")
     print("Choisir une action:")
@@ -49,6 +50,7 @@ def exec_menu(choice):
 
 # Menu 1
 def dnsscan_menu():
+    os.system('cls')
     # Boucle infinie pour permettre à l'utilisateur de choisir plusieurs options
     while True:
         # Affiche le menu d'options
@@ -59,6 +61,7 @@ def dnsscan_menu():
         print("4. Retour")
         # Demande à l'utilisateur de choisir une option
         choice = input("Entrer votre choix (1-4): ")
+        os.system('cls')
 
         # Exécute l'option choisie par l'utilisateur
         if choice == '1':
@@ -73,10 +76,11 @@ def dnsscan_menu():
         elif choice == '4':
             # Quitte le programme si l'utilisateur choisit l'option 4
              menu_actions['main_menu']()
+             os.system('cls')
         else:
 
             # Affiche un message pour demander à l'utilisateur de réessayer s'il n'a pas choisi une option valide
-            print("Veuillez réessayer.")
+            print("Veuillez réessayer.\n")
 
     # Exécute la fonction principale
     dnsscan_menu()
@@ -97,19 +101,19 @@ def dns_scan(domain):
             for rdata in answers:
                 file.write(f'Adresse IP : {rdata.address}\n')
         # Affiche un message indiquant que les résultats ont été enregistrés dans un fichier
-        print(f"Le resultat pour {domain} a été sauvegardé dans {domain}/resultat.txt.")
+        print(f"\nLe resultat pour {domain} a été sauvegardé dans {domain}/resultat.txt.")
     except dns.resolver.NXDOMAIN:
         # Affiche un message si le nom de domaine n'existe pas
-        print("Le domaine n'existe pas.")
+        print("\nLe domaine n'existe pas.")
     except dns.resolver.NoAnswer:
         # Affiche un message si aucune adresse IP n'a été trouvée pour le domaine
-        print("Aucune adresse IP n'a été trouvé pour ce domaine.")
+        print("\nAucune adresse IP n'a été trouvé pour ce domaine.")
     except dns.resolver.NoNameservers:
         # Affiche un message si le serveur DNS n'est pas accessible
-        print("Impossible d'accéder au serveur DNS.")
+        print("\nImpossible d'accéder au serveur DNS.")
     except:
         # Affiche un message générique en cas d'erreur
-        print("Une erreur s'est produite.")
+        print("\nUne erreur s'est produite.")
 
 def reverse_dns_lookup(ip):
     # Essaie de trouver le nom de domaine associé à une adresse IP
@@ -117,10 +121,10 @@ def reverse_dns_lookup(ip):
         # Utilise socket.gethostbyaddr pour trouver le nom de domaine associé à l'adresse IP
         domain = socket.gethostbyaddr(ip)
         # Affiche le nom de domaine associé à l'adresse IP
-        print(f"Le domaine de cette adresse IP {ip} est {domain[0]}")
+        print(f"\nLe domaine de cette adresse IP {ip} est {domain[0]}")
     except socket.herror:
             # Affiche un message si aucun domaine n'a été trouvé pour l'adresse IP
-        print("Aucun domaine n'a été trouvé pour cette adresse IP.")
+        print("\nAucun domaine n'a été trouvé pour cette adresse IP.")
 
 def check_malicious_domain(domain):
     # Définit l'URL de l'API de VirusTotal pour la vérification de site Web
@@ -144,12 +148,12 @@ def check_malicious_domain(domain):
 
         # Vérifie la réponse de l'API pour déterminer si le site Web est considéré comme malveillant
         if data["positives"] > 0:
-            print(f"Le site web {domain} est considéré comme malveillant.")
+            print(f"\nLe site web {domain} est considéré comme malveillant.")
         else:
-            print(f"Le site web {domain} est considéré comme sécurisé.")
+            print(f"\nLe site web {domain} est considéré comme sécurisé.")
     except:
         # Affiche un message générique en cas d'erreur lors de la vérification du site Web
-        print("Une erreur s'est produite lors de la vérification du site web.")
+        print("\nUne erreur s'est produite lors de la vérification du site web.")
 
 
 # Menu 2
@@ -162,7 +166,19 @@ def menu_shodan():
     print("2. Rechercher des informations sur une adresse IP")
     print("3. Retour")
     option = int(input("Choisissez une option (1-3) : "))
-    return option
+
+    if option == 1:
+        host_search(api)
+    elif option == 2:
+        ip_search(api)
+    elif option == 3: 
+        # Quitte le programme si l'utilisateur choisit l'option 4
+        menu_actions['main_menu']()
+        os.system('cls')
+    else:
+        print("Erreur dans la saisie du menu")
+    
+    return
     
 
 
@@ -183,6 +199,13 @@ def host_search(api):
             print("")
     except Exception as e:
         print("Une erreur s'est produite : ", e)
+
+
+    print("9. Back")
+    print("0. Quit")
+    choice = input(" >>  ")
+    exec_menu(choice)
+    return
         
 
 # Effectuer une recherche d'adresse IP en utilisant la méthode search
@@ -213,8 +236,11 @@ def ip_search(api):
     else:
         print("Aucun résultat trouvé.")
 
-# Boucle pour afficher le menu et effectuer des recherches en fonction de l'option choisie
-
+    print("9. Back")
+    print("0. Quit")
+    choice = input(" >>  ")
+    exec_menu(choice)
+    return
 
 
 # Menu 3
@@ -246,19 +272,14 @@ def theHarverster():
 
             nameFile = nameFile + "_" +  str(now.strftime("%Y-%d-%m_%H-%M-%S-%f"))
             destination = owd+"\\SaveTH\\"+nameFile+".json"
-            cmd = "python theHarvester.py -d "+ domaine +" -l "+ limite +" -b all -f "+nameFile+".json"
+            cmd = "python3 theHarvester.py -d "+ domaine +" -l "+ limite +" -b all -f "+nameFile+".json"
             fichierH = "theHarvester-master"
 
-            # cmd="python theHarvester.py -d qub.ac.uk -l 200 -b duckduckgo -f "+ nameFile +".json"
             os.chdir(fichierH)
             output = os.popen(cmd).read()
             owd2 = os.getcwd()
 
 
-            #-------------------------------------------------------------------------------------#
-            #------------MODIFIER LE CHEMIN SOURCE DU FICHIER-------------------------------------#
-            #-------------------------------------------------------------------------------------#
-            # source="C:\\Users\\lucas\\Desktop\\Projet-2-Py\\theHarvester-master\\"+nameFile+".json"
             source=owd2+"\\"+nameFile+".json"
 
             shutil.move(source,destination)
@@ -286,20 +307,14 @@ def theHarverster():
             # destination = input("\nOù souhaitez vous enregistrer le résultat (renseigné le chemin d'accès en doublant les \\) : ")+"\\"+nameFile+".json"
             destination = owd+"\\SaveTH\\"+nameFile+".json"
             # print(destination)
-            cmd = "python theHarvester.py -d "+ domaine +" -l "+ limite +" -b " + source + " -f "+nameFile+".json"
+            cmd = "python3 theHarvester.py -d "+ domaine +" -l "+ limite +" -b " + source + " -f "+nameFile+".json"
             fichierH = "theHarvester-master"
 
-            # cmd="python theHarvester.py -d qub.ac.uk -l 200 -b duckduckgo -f "+ nameFile +".json"
             os.chdir(fichierH)
             output = os.popen(cmd).read()
             owd2 = os.getcwd()
 
             # On déplace l'enregistrement du résultat
-
-            #-------------------------------------------------------------------------------------#
-            #------------MODIFIER LE CHEMIN SOURCE DU FICHIER-------------------------------------#
-            #-------------------------------------------------------------------------------------#
-            # source="C:\\Users\\lucas\\Desktop\\Projet-2-Py\\theHarvester-master\\"+nameFile+".json"
             source=owd2+"\\"+nameFile+".json"
             # print(source)
 
@@ -383,14 +398,7 @@ menu_actions = {
     '9': back,
     '0': exit,
 }
-while True:
-    option = menu_shodan()
-    if option == 1:
-        host_search(api)
-    elif option == 2:
-        ip_search(api)
-    else:
-        break
+
 # =======================
 #      MAIN PROGRAM
 # =======================

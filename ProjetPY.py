@@ -19,7 +19,7 @@ menu_actions  = {}
 def main_menu():
     # os.system('clear')
     
-    print("Bienvenu,\n")
+    print("Bienvenu, sur le projet OSINT\nAUTHEUR DU PROJET : ROUABAH Mohamed-Amine ; AYUB TAHIR Anthony ; CHAUVRY Lucas\nRéalisation du projet en 2023\nN'oublier pas de lire le README.TXT pour installer les dépendances.\n")
     print("Choisir une action:")
     print("1. Dnsscan")
     print("2. Shodan")

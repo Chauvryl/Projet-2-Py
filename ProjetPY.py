@@ -20,7 +20,7 @@ menu_actions  = {}
 def main_menu():
     # os.system('clear')
     
-    print("Bienvenu,\n")
+    print("Bienvenue, sur le projet OSINT\nAUTHEUR DU PROJET : ROUABAH Mohamed-Amine ; AYUB TAHIR Anthony ; CHAUVRY Lucas\nRéalisation du projet en 2023\nN'oublier pas de lire le README.TXT pour installer les dépendances.\n")
     print("Choisir une action:")
     print("1. Dnsscan")
     print("2. Shodan")
@@ -246,10 +246,10 @@ def theHarverster():
 
             nameFile = nameFile + "_" +  str(now.strftime("%Y-%d-%m_%H-%M-%S-%f"))
             destination = owd+"\\SaveTH\\"+nameFile+".json"
-            cmd = "python3 theHarvester.py -d "+ domaine +" -l "+ limite +" -b all -f "+nameFile+".json"
+            cmd = "python theHarvester.py -d "+ domaine +" -l "+ limite +" -b all -f "+nameFile+".json"
             fichierH = "theHarvester-master"
 
-            # cmd="python3 theHarvester.py -d qub.ac.uk -l 200 -b duckduckgo -f "+ nameFile +".json"
+            # cmd="python theHarvester.py -d qub.ac.uk -l 200 -b duckduckgo -f "+ nameFile +".json"
             os.chdir(fichierH)
             output = os.popen(cmd).read()
             owd2 = os.getcwd()
@@ -286,10 +286,10 @@ def theHarverster():
             # destination = input("\nOù souhaitez vous enregistrer le résultat (renseigné le chemin d'accès en doublant les \\) : ")+"\\"+nameFile+".json"
             destination = owd+"\\SaveTH\\"+nameFile+".json"
             # print(destination)
-            cmd = "python3 theHarvester.py -d "+ domaine +" -l "+ limite +" -b " + source + " -f "+nameFile+".json"
+            cmd = "python theHarvester.py -d "+ domaine +" -l "+ limite +" -b " + source + " -f "+nameFile+".json"
             fichierH = "theHarvester-master"
 
-            # cmd="python3 theHarvester.py -d qub.ac.uk -l 200 -b duckduckgo -f "+ nameFile +".json"
+            # cmd="python theHarvester.py -d qub.ac.uk -l 200 -b duckduckgo -f "+ nameFile +".json"
             os.chdir(fichierH)
             output = os.popen(cmd).read()
             owd2 = os.getcwd()
@@ -326,6 +326,35 @@ def theHarverster():
 # Menu 4
 def urlscan():
     print("Menu URLSCAN !\n")
+    
+    # ---------------------------------------------------------------
+
+    while (True):
+        apikey = input("\n Inserer votre clef api :")
+        url = input("\n Inserer l'url à scan : ")
+
+        try:
+            headers = {'API-Key':apikey,'Content-Type':'application/json'}
+            data = {"url": url, "visibility": "public"}
+            response = requests.post('https://urlscan.io/api/v1/scan/',headers=headers, data=json.dumps(data))
+
+            if(response.status_code != 200):
+                print("code erreur", response.status_code)
+                raise Exception
+
+            # print(response)
+            # print(type(response))
+            break
+
+        except:
+            print("Cette clef ne marche pas \n")
+
+    # RESULT
+    print(response.json()["result"])
+
+
+    # ------------------------------------------------------------
+
     print("9. Back")
     print("0. Quit")
     choice = input(" >>  ")
